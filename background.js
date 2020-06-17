@@ -1,5 +1,7 @@
 function maybeClose(tabId, changeInfo, tab) {
-	if (tab.url.match(/https:\/\/([a-z]+).zoom.us\/[a-z]\/([0-9]+)\?(.*)?status=success/)) {
+	// example url: https://foo.zoom.us/j/634874123#success
+	if (tab.url.match(/https:\/\/(?:[a-z0-9_]+[.])?zoom.us\/[a-z]\/[0-9]+\/?[?#](?:.*status=)?success/) ||
+			tab.url.match(/https:\/\/[a-z]+\.zoom\.us\/postattendee.*/)) {
 		setTimeout(function() {
 			browser.tabs.remove(tab.id);
 		}, 2000);
